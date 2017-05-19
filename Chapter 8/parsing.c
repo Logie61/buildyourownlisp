@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../include/mpc.h"
+#include "mpc.h"
 
 #ifdef _WIN32
 #include <string.h>
