@@ -134,45 +134,45 @@ lval eval(mpc_ast_t* t){
     strcpy(op,t->children[1]->contents);
     
 
-    // if(strcmp(op,"min") == 0){
-    //     int s = 2; //start after operator
-    //     long lowest = 0;
+    if(strcmp(op,"min") == 0){
+        int s = 2; //start after operator
+        long lowest = 0;
 
-    //     while(strstr(t -> children[s]->tag,"number")){
-    //         long value = eval(t->children[s]);
-    //         if(lowest == 0){
-    //             lowest = value;
-    //         } else {
-    //             lowest = value < lowest ? value : lowest;
-    //         }
-    //         s++;
-    //     }   
+        while(strstr(t -> children[s]->tag,"number")){
+            lval value = eval(t->children[s]);
+            if(lowest == 0){
+                lowest = value.num;
+            } else {
+                lowest = value.num < lowest ? value.num : lowest;
+            }
+            s++;
+        }   
 
-    //     return lowest;
-    // }
+        return lval_num(lowest);
+    }
 
-    // if(strcmp(op,"max") == 0){
-    //     int s = 2; //start after operator
-    //     long highest = 0;
+    if(strcmp(op,"max") == 0){
+        int s = 2; //start after operator
+        long highest = 0;
 
-    //     while(strstr(t -> children[s]->tag,"number")){
-    //         long value = eval(t->children[s]);
-    //         if(highest == 0){
-    //             highest = value;
-    //         } else {
-    //             highest = value > highest ? value : highest;
-    //         }
-    //         s++;
-    //     }   
+        while(strstr(t -> children[s]->tag,"number")){
+            lval value = eval(t->children[s]);
+            if(highest == 0){
+                highest = value.num;
+            } else {
+                highest = value.num > highest ? value.num : highest;
+            }
+            s++;
+        }   
 
-    //     return highest;
-    // }
+        return lval_num(highest);
+    }
 
     //evaluate and store third child in x
     lval x = eval(t->children[2]);
 
     /* If '-' operator receives one argument, negate it */
-    //if (strcmp(op, "-") == 0 && t->children_num < 5) { return 0 - x; }
+    if (strcmp(op, "-") == 0 && t->children_num < 5) { return lval_num(0 - x.num) ; }
 
     int i = 3;
     while(strstr(t -> children[i]->tag,"expr")){
